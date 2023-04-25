@@ -28,7 +28,7 @@ $resultGym = $conn -> query($sqlGymChk);
 $gyms = $resultGym -> fetch_all(MYSQLI_ASSOC);
 ?>
 <?php 
-$title = "Add Gym";
+$title = "Add Gym Plan";
 require_once __DIR__ . "/include/layout-start.php"; 
 ?>
 <section class="section">
