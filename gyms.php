@@ -7,10 +7,10 @@ $currentPage = "events";
     $user_id = 0;
     $sql = "SELECT a.*, null as r_date FROM tbl_gyms a";
 
-    // if($helper->isUserLogin()){
-    //     $user_id = $_SESSION['uid'];
-    //     $sql = "SELECT a.*, (SELECT b.date FROM tbl_event_register b WHERE a.id=b.gym_id AND b.user_id = $user_id) AS reg_date FROM tbl_gyms a;";
-    // }
+    if($helper->isUserLogin()){
+        $user_id = $_SESSION['uid'];
+        // $sql = "SELECT a.*, (SELECT b.date FROM tbl_event_register b WHERE a.id=b.gym_id AND b.user_id = $user_id) AS reg_date FROM tbl_gyms a;";
+    }
 
     $result = $conn -> query($sql);
     $rows = $result -> fetch_all(MYSQLI_ASSOC);

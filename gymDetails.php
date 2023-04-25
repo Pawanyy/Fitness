@@ -22,15 +22,15 @@ if(isset($_GET['gym_id']) && !empty($_GET['gym_id'])){
 }
 
 $sql = "SELECT a.*, null as r_date FROM tbl_gyms a WHERE a.id = $gym_id";
-
-if($helper->isUserLogin()){
-    // $sql = "SELECT a.*, (SELECT b.date FROM tbl_event_register b WHERE a.id=b.gym_id AND b.user_id = $user_id) AS reg_date FROM tbl_gyms a WHERE a.id = $gym_id; ";
-}
-
 $result = $conn -> query($sql);
 $row = $result -> fetch_assoc();
 
 $sqlPlans = "SELECT a.* FROM tbl_gym_plans a WHERE a.gym_id = $gym_id";
+
+if($helper->isUserLogin()){
+    $sqlPlans = "SELECT a.*, (SELECT b.date FROM tbl_gym_register b WHERE a.id=b.plan_id AND b.user_id = $user_id LIMIT 1) AS reg_date FROM tbl_gym_plans a WHERE a.gym_id = $gym_id;";
+}
+
 $resultPlans = $conn -> query($sqlPlans);
 $gymPlans = $resultPlans -> fetch_all(MYSQLI_ASSOC);
 
@@ -77,18 +77,7 @@ $activities = explode(",", $row['activities']);
                                 <div class="list-group-item"><?=$value?></div>
                                 <?php } ?>
                             </div>
-                            <!-- <?php if(empty($row['reg_date'])){ ?>
-                            <a href="<?=BASE_URL?>gyms.php?gym_id=<?=$row['id']?>"
-                                onclick="return confirm('Are you Sure to book for <?=$row['name']?> event!')"
-                                class="btn btn-warning">Book</a>
-                            <?php } else { ?>
-                                <button class="btn btn-secondary">Already Booked</button>
-                                <span class="d-block font-sm mt-2"> Registered on: <?= $row['reg_date'] ?></span>
-                            <?php } ?> -->
                         </div>
-                        <!-- <div class="card-footer">
-                            <span><?= $row['date'] ?></span>
-                        </div> -->
                     </div>
                 </div>
             </div>
@@ -117,11 +106,17 @@ $activities = explode(",", $row['activities']);
                                 <?php } ?>
                             </ul>
                             <?php if($helper->isUserLogin()){ ?>
-                                <form action="gyms.php" method="post">
-                                    <input type="hidden" name="plan_id" value="<?=$value['id']?>">
-                                    <input type="hidden" name="gym_id" value="<?=$gym_id?>">
-                                    <button type="submit" name="register" class="w-100 btn btn-lg btn-outline-primary">Sign up for free</button>
-                                </form>
+                                <?php if(empty($value['reg_date'])){ ?>
+                                    <form action="gyms.php" method="post">
+                                        <input type="hidden" name="plan_id" value="<?=$value['id']?>">
+                                        <input type="hidden" name="gym_id" value="<?=$gym_id?>">
+                                        <button type="submit" name="register" class="w-100 btn btn-lg btn-outline-primary">Sign up for free</button>
+                                    </form>
+                                <?php } else { ?>
+                                    <button class="w-100 btn btn-lg btn-outline-secondary">Current Plan</button>
+                                    <span class="d-block font-sm mt-2"> Registered on: <?= $value['reg_date'] ?></span>
+                                <?php } ?>
+                                
                             <?php } else { ?>
                             <a href="login.php" class="w-100 btn btn-lg btn-outline-primary">Sign up for free</a>
                             <?php } ?>
