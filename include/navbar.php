@@ -13,7 +13,7 @@
                     <li class="nav-item"><a class="nav-link <?=(isset($currentPage) && $currentPage == "home") ? "active" : ""?>" href="<?=BASE_URL?>">Home</a></li>
                     <li class="nav-item"><a class="nav-link <?=(isset($currentPage) && $currentPage == "gallery") ? "active" : ""?>" href="<?=BASE_URL?>gallery.php">Gallery</a></li>
                     <li class="nav-item"><a class="nav-link <?=(isset($currentPage) && $currentPage == "about") ? "active" : ""?>" href="<?=BASE_URL?>about.php">About</a></li>
-                    <li class="nav-item"><a class="nav-link <?=(isset($currentPage) && $currentPage == "events") ? "active" : ""?>" href="<?=BASE_URL?>events.php">Events</a></li>
+                    <li class="nav-item"><a class="nav-link <?=(isset($currentPage) && $currentPage == "gyms") ? "active" : ""?>" href="<?=BASE_URL?>gyms.php">Events</a></li>
                     <li class="nav-item"><a class="nav-link <?=(isset($currentPage) && $currentPage == "contact") ? "active" : ""?>" href="<?=BASE_URL?>contact.php">Contact</a></li>
 
                 </ul>

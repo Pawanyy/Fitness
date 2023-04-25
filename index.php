@@ -158,7 +158,7 @@ $currentPage = "home";
     <?php } ?>
     </div>
     <a class="btn btn-link w-100 h4 text-decoration-none mouse-pointer pb-2 text-center border border-1 py-2 mt-2 px-4"
-        href="<?=BASE_URL?>events.php">View More</a>
+        href="<?=BASE_URL?>gyms.php">View More</a>
 </section>
 <section>
     <div class="container px-4 py-5" id="custom-cards">
