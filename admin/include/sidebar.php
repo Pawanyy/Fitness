@@ -18,16 +18,16 @@
         </li>
 
         <!-- <li class="nav-item">
-            <a class="nav-link collapsed" href="<?=ADMIN_URL?>donations.php">
+            <a class="nav-link collapsed" href="<?=ADMIN_URL?>gymPlans.php">
                 <i class="bi bi-buildings"></i>
                 <span>Property Status</span>
             </a>
         </li> -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="<?=ADMIN_URL?>donations.php">
+            <a class="nav-link collapsed" href="<?=ADMIN_URL?>gymPlans.php">
                 <i class="bi bi-globe-americas"></i>
-                <span>Donations</span>
+                <span>Gym Plans</span>
             </a>
         </li>
 
