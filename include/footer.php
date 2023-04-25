@@ -4,7 +4,7 @@
 
             <div class="col-6 mb-3">
                 <a class="d-inline-flex align-items-center mb-2 text-body-secondary text-decoration-none" href="/" aria-label="Bootstrap">
-                    <img src="<?=BASE_URL?>/assets/img/NSSLogo.png" alt="Logo" height="50" class="rounded-3">
+                    <img src="<?=BASE_URL?>/assets/img/IconLogo.png" alt="Logo" height="50" class="rounded-3">
                     <span class="fs-2 ms-2"><?=$settings['name']?></span>
                 </a>
                 <ul class="list-unstyled small">

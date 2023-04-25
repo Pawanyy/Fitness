@@ -2,7 +2,7 @@
     <nav class="navbar sticky-top navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary">
         <div class="container">
             <a class="navbar-brand" href="<?=BASE_URL?>">
-                <img src="<?=BASE_URL?>/assets/img/NSS.png" alt="Logo" height="35" class="d-inline-block align-text-top rounded-4">
+                <img src="<?=BASE_URL?>/assets/img/Logo.png" alt="Logo" height="35" class="d-inline-block align-text-top rounded-4">
             </a>
             <button type="button" class="navbar-toggler" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" title="Toggle navigation" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
