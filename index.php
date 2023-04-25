@@ -5,13 +5,13 @@ $currentPage = "home";
 <?php
     $gallery = array_splice($gallery, 0, 3);
 
-    $sqlEvents = "SELECT a.* FROM tbl_events a ORDER BY a.id DESC LIMIT 3";
+    $sqlEvents = "SELECT a.* FROM tbl_gyms a ORDER BY a.id DESC LIMIT 3";
     $resultEvents = $conn -> query($sqlEvents);
     $rowEvents = $resultEvents -> fetch_all(MYSQLI_ASSOC);
 ?>
 <style>
     .cover-bg {
-        background-image: url('<?=BASE_URL?>assets/img/bg/nssWLogo.jpg');
+        background-image: url('<?=BASE_URL?>assets/img/bg/BannerBg.jpg');
         background-size: cover;
     }
 
@@ -168,7 +168,7 @@ $currentPage = "home";
             <div class="col">
                 <div class="card card-cover h-100 overflow-hidden rounded-4 shadow-lg" style="background-image: url(@Url.Content("~/assets/img/RealEstate-bg1.jpg"));">
                     <div class="d-flex flex-column h-100 p-5 py-3 text-shadow-1">
-                        <h3 class="my-4 display-6 lh-1 fw-bold"><q>I was impressed by the quantity and quality of NSS Work.</q></h3>
+                        <h3 class="my-4 display-6 lh-1 fw-bold"><q>I was impressed by the quantity and quality of Fitness.</q></h3>
                         <ul class="d-flex list-unstyled mt-auto">
                             <li class="me-auto">
                                 <i class="bi-person-circle fs-3"></i>
@@ -189,7 +189,7 @@ $currentPage = "home";
             <div class="col">
                 <div class="card card-cover h-100 overflow-hidden rounded-4 shadow-lg" style="background-image: url('unsplash-photo-2.jpg');">
                     <div class="d-flex flex-column h-100 p-5 py-3 text-shadow-1">
-                        <h3 class="my-4 display-6 lh-1 fw-bold"><q>NNS's global reach helped me find the opportunity to Broden my View.</q></h3>
+                        <h3 class="my-4 display-6 lh-1 fw-bold"><q>Fitness global reach helped me find the opportunity to Broden my View.</q></h3>
                         <ul class="d-flex list-unstyled mt-auto">
                             <li class="me-auto">
                                 <i class="bi-person-circle fs-3"></i>
@@ -210,7 +210,7 @@ $currentPage = "home";
             <div class="col">
                 <div class="card card-cover h-100 overflow-hidden rounded-4 shadow-lg" style="background-image: url('unsplash-photo-3.jpg');">
                     <div class="d-flex flex-column h-100 p-5 py-3 text-shadow-1">
-                        <h3 class="my-4 display-6 lh-1 fw-bold"><q>NSS made me Learn may New Things By Practice.</q></h3>
+                        <h3 class="my-4 display-6 lh-1 fw-bold"><q>Fitness made me Learn may New Things By Practice.</q></h3>
                         <ul class="d-flex list-unstyled mt-auto">
                             <li class="me-auto">
                                 <i class="bi-person-circle fs-3"></i>
