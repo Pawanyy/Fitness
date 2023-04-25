@@ -2,3 +2,5 @@
 /nss-old
 .env
 *.zip
+removed/*
+*/removed/*

@@ -20,9 +20,6 @@ if(isset($_GET['did']) && !empty($_GET['did'])){
 
     if($result){
         
-        $conn -> query("DELETE FROM tbl_donation WHERE user_id = $user_id");
-        $conn -> query("DELETE FROM tbl_event_register WHERE user_id = $user_id");
-
         $helper->SendSuccessToast("User Deleted Sucessfully");
         $helper->Redirect(ADMIN_URL . 'users.php');
     } else {
@@ -37,7 +34,7 @@ require_once __DIR__ . "/include/layout-start.php";
 ?>
 <?php
 $role = ROLE::USER;
-$sql = "SELECT a.*, COUNT(DISTINCT b.event_id) AS reg_events, SUM(d.donation) AS donation FROM tbl_users a LEFT JOIN tbl_event_register b ON a.id=b.user_id LEFT JOIN tbl_events c ON c.id=b.event_id LEFT JOIN tbl_donation d ON a.id=d.user_id  WHERE a.role = $role GROUP BY a.id;";
+$sql = "SELECT a.* FROM tbl_users a WHERE a.role = $role GROUP BY a.id;";
 $result = $conn -> query($sql);
 $rows = $result -> fetch_all(MYSQLI_ASSOC);
 ?>
@@ -55,8 +52,6 @@ $rows = $result -> fetch_all(MYSQLI_ASSOC);
                 <th scope="col">Email</th>
                 <th scope="col">Phone</th>
                 <th scope="col">Registered At</th>
-                <th scope="col">Registered Events</th>
-                <th scope="col">Total Donations</th>
                 <th scope="col">Details</th>
             </tr>
         </thead>
@@ -72,8 +67,6 @@ $rows = $result -> fetch_all(MYSQLI_ASSOC);
                     <td><?=$value['email']?></td>
                     <td><?=$value['phone']?></td>
                     <td><?=$value['created_at']?></td>
-                    <td><?=$value['reg_events']?></td>
-                    <td><?=$value['donation']?></td>
                     <td>
                         <a class="me-1" href="<?=ADMIN_URL?>user.php?user_id=<?=$value['id']?>">
                             View
