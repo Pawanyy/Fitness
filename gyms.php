@@ -9,17 +9,17 @@ $currentPage = "events";
 
     // if($helper->isUserLogin()){
     //     $user_id = $_SESSION['uid'];
-    //     $sql = "SELECT a.*, (SELECT b.date FROM tbl_event_register b WHERE a.id=b.event_id AND b.user_id = $user_id) AS reg_date FROM tbl_gyms a;";
+    //     $sql = "SELECT a.*, (SELECT b.date FROM tbl_event_register b WHERE a.id=b.gym_id AND b.user_id = $user_id) AS reg_date FROM tbl_gyms a;";
     // }
 
     $result = $conn -> query($sql);
     $rows = $result -> fetch_all(MYSQLI_ASSOC);
 
-    // if(isset($_GET['event_id']) && $helper->isUserLogin()){
-    //     $event_id = $_GET['event_id'];
+    // if(isset($_GET['gym_id']) && $helper->isUserLogin()){
+    //     $gym_id = $_GET['gym_id'];
     //     $date = date('Y-m-d h:i:s A');
 
-    //     $sqlEventChk = "SELECT a.*, (SELECT b.date FROM tbl_event_register b WHERE a.id=b.event_id AND b.user_id = $user_id) AS reg_date FROM tbl_gyms a WHERE a.id = $event_id;";
+    //     $sqlEventChk = "SELECT a.*, (SELECT b.date FROM tbl_event_register b WHERE a.id=b.gym_id AND b.user_id = $user_id) AS reg_date FROM tbl_gyms a WHERE a.id = $gym_id;";
     //     $resultEventChk = $conn -> query($sqlEventChk);
     //     $rowEvent = $resultEventChk -> fetch_assoc();
 
@@ -33,8 +33,8 @@ $currentPage = "events";
     //         $helper->Redirect(BASE_URL . "gyms.php");
     //     }
 
-    //     $sqlEventRegister = "INSERT INTO `tbl_event_register`( `event_id`, `user_id`, `date`) 
-    //                         VALUES ('$event_id','$user_id','$date')";
+    //     $sqlEventRegister = "INSERT INTO `tbl_event_register`( `gym_id`, `user_id`, `date`) 
+    //                         VALUES ('$gym_id','$user_id','$date')";
     //     $resultEventRegister = $conn -> query($sqlEventRegister);
 
     //     if($resultEventRegister){
@@ -44,7 +44,7 @@ $currentPage = "events";
     //         $helper->SendErrorToast("Cannot Registered for $rowEvent[name] Event!!");
     //         $helper->Redirect(BASE_URL . "gyms.php");
     //     }
-    // } else if(isset($_GET['event_id'])) {
+    // } else if(isset($_GET['gym_id'])) {
     //     $helper->Redirect(BASE_URL . "login.php");
     // }
 ?>
@@ -102,7 +102,7 @@ $currentPage = "events";
                             <div class="card-body">
                                 <p class="card-text">
                                     <?=substr($value['description'], 0, 255)."..."?>
-                                    <a href="<?=BASE_URL?>gymDetails.php?event_id=<?=$value['id']?>"
+                                    <a href="<?=BASE_URL?>gymDetails.php?gym_id=<?=$value['id']?>"
                                     class="btn btn-link text-decoration-none p-0">Read more</a>
                                 </p>
                             </div>

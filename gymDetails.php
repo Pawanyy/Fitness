@@ -5,10 +5,10 @@ if($helper->isUserLogin()){
     $user_id = $_SESSION['uid'];
 }
 
-if(isset($_GET['event_id']) && !empty($_GET['event_id'])){
-    $event_id = $_GET['event_id'];
+if(isset($_GET['gym_id']) && !empty($_GET['gym_id'])){
+    $gym_id = $_GET['gym_id'];
     
-    $sqlEventChk = "SELECT a.* FROM tbl_gyms a WHERE a.id = $event_id";
+    $sqlEventChk = "SELECT a.* FROM tbl_gyms a WHERE a.id = $gym_id";
     $resultEventChk = $conn -> query($sqlEventChk);
     $rowEvent = $resultEventChk -> fetch_assoc();
     
@@ -21,16 +21,16 @@ if(isset($_GET['event_id']) && !empty($_GET['event_id'])){
     $helper->Redirect(BASE_URL . "gyms.php");
 }
 
-$sql = "SELECT a.*, null as r_date FROM tbl_gyms a WHERE a.id = $event_id";
+$sql = "SELECT a.*, null as r_date FROM tbl_gyms a WHERE a.id = $gym_id";
 
-// if($helper->isUserLogin()){
-//     $sql = "SELECT a.*, (SELECT b.date FROM tbl_event_register b WHERE a.id=b.event_id AND b.user_id = $user_id) AS reg_date FROM tbl_gyms a WHERE a.id = $event_id; ";
-// }
+if($helper->isUserLogin()){
+    // $sql = "SELECT a.*, (SELECT b.date FROM tbl_event_register b WHERE a.id=b.gym_id AND b.user_id = $user_id) AS reg_date FROM tbl_gyms a WHERE a.id = $gym_id; ";
+}
 
 $result = $conn -> query($sql);
 $row = $result -> fetch_assoc();
 
-$sqlPlans = "SELECT a.* FROM tbl_gym_plans a WHERE a.gym_id = $event_id";
+$sqlPlans = "SELECT a.* FROM tbl_gym_plans a WHERE a.gym_id = $gym_id";
 $resultPlans = $conn -> query($sqlPlans);
 $gymPlans = $resultPlans -> fetch_all(MYSQLI_ASSOC);
 
@@ -78,7 +78,7 @@ $activities = explode(",", $row['activities']);
                                 <?php } ?>
                             </div>
                             <!-- <?php if(empty($row['reg_date'])){ ?>
-                            <a href="<?=BASE_URL?>gyms.php?event_id=<?=$row['id']?>"
+                            <a href="<?=BASE_URL?>gyms.php?gym_id=<?=$row['id']?>"
                                 onclick="return confirm('Are you Sure to book for <?=$row['name']?> event!')"
                                 class="btn btn-warning">Book</a>
                             <?php } else { ?>
@@ -102,7 +102,7 @@ $activities = explode(",", $row['activities']);
                     $facilities = explode(",", $value['facilities']);
                     ?>
                 <div class="col-4">
-                    <div class="card mb-4 rounded-3 shadow-sm">
+                    <div class="card mb-4 rounded-3 shadow-sm text-center">
                         <div class="card-header py-3">
                             <h4 class="my-0 fw-normal"><?=$value['name']?></h4>
                         </div>
@@ -112,11 +112,18 @@ $activities = explode(",", $row['activities']);
                                 <small class="text-muted fw-light">/ <?=$value['duration']?> months</small>
                             </h1>
                             <ul class="list-unstyled mt-3 mb-4">
-                                <?php foreach($facilities as $key => $value) { ?>
-                                <li><?=$value?></li>
+                                <?php foreach($facilities as $key => $facility) { ?>
+                                <li><?=$facility?></li>
                                 <?php } ?>
                             </ul>
-                            <!-- <button type="button" class="w-100 btn btn-lg btn-outline-primary">Sign up for free</button> -->
+                            <?php if($helper->isUserLogin()){ ?>
+                                <form action="gyms.php" method="post">
+                                    <input type="hidden" value="<?=$value['id']?>">
+                                    <button type="submit" name="submit" class="w-100 btn btn-lg btn-outline-primary">Sign up for free</button>
+                                </form>
+                            <?php } else { ?>
+                            <a href="login.php" class="w-100 btn btn-lg btn-outline-primary">Sign up for free</a>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
