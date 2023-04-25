@@ -1,0 +1,17 @@
+# Canonical https/www
+RewriteEngine On
+#RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteCond %{HTTP_HOST} ^(?:www\.)?(.+)$ [NC]
+RewriteRule ^ http://%1%{REQUEST_URI} [L,NE,R=301]
+
+# Disable Directory listing
+Options -Indexes
+
+ErrorDocument 404 /404.php
+
+# block files which needs to be hidden, specify .example extension of the file
+<Files ~ "\.(env|json|config.js|md|gitignore|gitattributes|lock|sh|zip)$">
+    Order allow,deny
+    Deny from all
+</Files>

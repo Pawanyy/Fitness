@@ -1,0 +1,17 @@
+# Canonical https/www
+# RewriteEngine On
+# RewriteBase /
+# NOT needed unless you're using mod_alias to redirect
+# RewriteCond %{REQUEST_URI} !/public
+# RewriteRule ^(.*)$ public/$1 [L]
+
+# Disable Directory listing
+Options -Indexes
+
+ErrorDocument 404 /404.php
+
+# block files which needs to be hidden, specify .example extension of the file
+<Files ~ "\.(env|json|config.js|md|gitignore|gitattributes|lock|sh|zip)$">
+    Order allow,deny
+    Deny from all
+</Files>
