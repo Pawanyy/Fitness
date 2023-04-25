@@ -8,7 +8,7 @@ if($helper->isUserLogin()){
 if(isset($_GET['event_id']) && !empty($_GET['event_id'])){
     $event_id = $_GET['event_id'];
     
-    $sqlEventChk = "SELECT a.* FROM tbl_events a WHERE a.id = $event_id";
+    $sqlEventChk = "SELECT a.* FROM tbl_gyms a WHERE a.id = $event_id";
     $resultEventChk = $conn -> query($sqlEventChk);
     $rowEvent = $resultEventChk -> fetch_assoc();
     
@@ -21,11 +21,11 @@ if(isset($_GET['event_id']) && !empty($_GET['event_id'])){
     $helper->Redirect(BASE_URL . "events.php");
 }
 
-$sql = "SELECT a.*, null as r_date FROM tbl_events a WHERE a.id = $event_id";
+$sql = "SELECT a.*, null as r_date FROM tbl_gyms a WHERE a.id = $event_id";
 
-if($helper->isUserLogin()){
-    $sql = "SELECT a.*, (SELECT b.date FROM tbl_event_register b WHERE a.id=b.event_id AND b.user_id = $user_id) AS reg_date FROM tbl_events a WHERE a.id = $event_id; ";
-}
+// if($helper->isUserLogin()){
+//     $sql = "SELECT a.*, (SELECT b.date FROM tbl_event_register b WHERE a.id=b.event_id AND b.user_id = $user_id) AS reg_date FROM tbl_gyms a WHERE a.id = $event_id; ";
+// }
 
 $result = $conn -> query($sql);
 $row = $result -> fetch_assoc();
@@ -33,7 +33,7 @@ $row = $result -> fetch_assoc();
 <main role="main">
     <section class="jumbotron text-center">
         <div class="container">
-            <h1 class="jumbotron-heading">Event Details</h1>
+            <h1 class="jumbotron-heading">Gym Details</h1>
         </div>
     </section>
     <div class="album py-5 bg-light">
