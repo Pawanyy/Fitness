@@ -65,7 +65,7 @@ $rows = $result -> fetch_all(MYSQLI_ASSOC);
                         <a href="<?=BASE_URL?>gymDetails.php?gym_id=<?=$value['id']?>">
                             View
                         </a>
-                        <a href="<?=BASE_URL?>myGyms.php?gym_id=<?=$value['id']?>">
+                        <a class="ms-2" href="<?=BASE_URL?>myGyms.php?gym_id=<?=$value['id']?>">
                             Cancel
                         </a>
                     </td>

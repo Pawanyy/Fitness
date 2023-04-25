@@ -30,7 +30,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="<?=BASE_URL?>profile.php">Profile</a></li>
-                                <li><a class="dropdown-item" href="<?=BASE_URL?>donations.php">Donations</a></li>
+                                <!-- <li><a class="dropdown-item" href="<?=BASE_URL?>donations.php">Donations</a></li> -->
                                 <li><hr class="dropdown-divider"></li>
                                 <li><a class="dropdown-item" href="<?=BASE_URL?>mygyms.php">Registered Event</a></li>
                             </ul>
