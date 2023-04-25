@@ -11,9 +11,9 @@
         </li><!-- End Dashboard Nav -->
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="<?=ADMIN_URL?>events.php">
+            <a class="nav-link collapsed" href="<?=ADMIN_URL?>gyms.php">
                 <i class="bi bi-houses"></i>
-                <span>Events</span>
+                <span>Gyms</span>
             </a>
         </li>
 
