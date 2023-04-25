@@ -118,8 +118,9 @@ $activities = explode(",", $row['activities']);
                             </ul>
                             <?php if($helper->isUserLogin()){ ?>
                                 <form action="gyms.php" method="post">
-                                    <input type="hidden" value="<?=$value['id']?>">
-                                    <button type="submit" name="submit" class="w-100 btn btn-lg btn-outline-primary">Sign up for free</button>
+                                    <input type="hidden" name="plan_id" value="<?=$value['id']?>">
+                                    <input type="hidden" name="gym_id" value="<?=$gym_id?>">
+                                    <button type="submit" name="register" class="w-100 btn btn-lg btn-outline-primary">Sign up for free</button>
                                 </form>
                             <?php } else { ?>
                             <a href="login.php" class="w-100 btn btn-lg btn-outline-primary">Sign up for free</a>

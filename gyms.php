@@ -15,38 +15,43 @@ $currentPage = "events";
     $result = $conn -> query($sql);
     $rows = $result -> fetch_all(MYSQLI_ASSOC);
 
-    // if(isset($_GET['gym_id']) && $helper->isUserLogin()){
-    //     $gym_id = $_GET['gym_id'];
-    //     $date = date('Y-m-d h:i:s A');
+    if(isset($_POST['register']) && $helper->isUserLogin()){
+        $gym_id = $_POST['gym_id'];
+        $plan_id = $_POST['plan_id'];
+        $date = date('Y-m-d h:i:s A');
 
-    //     $sqlEventChk = "SELECT a.*, (SELECT b.date FROM tbl_event_register b WHERE a.id=b.gym_id AND b.user_id = $user_id) AS reg_date FROM tbl_gyms a WHERE a.id = $gym_id;";
-    //     $resultEventChk = $conn -> query($sqlEventChk);
-    //     $rowEvent = $resultEventChk -> fetch_assoc();
+        $sqlGymChk = "SELECT a.*, (SELECT b.date FROM tbl_gym_register b WHERE a.id=b.gym_id AND b.user_id = $user_id AND b.plan_id = $plan_id) AS reg_date FROM tbl_gyms a WHERE a.id = $gym_id;";
+        $resultGymChk = $conn -> query($sqlGymChk);
+        $rowGym = $resultGymChk -> fetch_assoc();
 
-    //     if($rowEvent === false || empty($rowEvent)){
-    //         $helper->SendErrorToast("Event Doesn't Exist!!");
-    //         $helper->Redirect(BASE_URL . "gyms.php");
-    //     }
+        if($rowGym === false || empty($rowGym)){
+            $helper->SendErrorToast("Gym Doesn't Exist!!");
+            $helper->Redirect(BASE_URL . "gyms.php");
+        }
 
-    //     if( !empty($rowEvent['r_date'])){
-    //         $helper->SendErrorToast("Already Registered for $rowEvent[name] Event!!");
-    //         $helper->Redirect(BASE_URL . "gyms.php");
-    //     }
+        if( !empty($rowGym['r_date'])){
+            $helper->SendErrorToast("Already Registered for $rowGym[name] Gym!!");
+            $helper->Redirect(BASE_URL . "gyms.php");
+        }
 
-    //     $sqlEventRegister = "INSERT INTO `tbl_event_register`( `gym_id`, `user_id`, `date`) 
-    //                         VALUES ('$gym_id','$user_id','$date')";
-    //     $resultEventRegister = $conn -> query($sqlEventRegister);
+        $conn -> query("DELETE FROM tbl_gym_register WHERE gym_id = $gym_id AND user_id = $user_id");
 
-    //     if($resultEventRegister){
-    //         $helper->SendSuccessToast("Registered for $rowEvent[name] Event!!");
-    //         $helper->Redirect(BASE_URL . "gyms.php");
-    //     } else {
-    //         $helper->SendErrorToast("Cannot Registered for $rowEvent[name] Event!!");
-    //         $helper->Redirect(BASE_URL . "gyms.php");
-    //     }
-    // } else if(isset($_GET['gym_id'])) {
-    //     $helper->Redirect(BASE_URL . "login.php");
-    // }
+        $sqlGymRegister = "INSERT INTO `tbl_gym_register`( `gym_id`, plan_id, `user_id`, `date`) 
+                            VALUES ('$gym_id', '$plan_id', '$user_id','$date')";
+        $resultGymRegister = $conn -> query($sqlGymRegister);
+
+        echo $sqlGymRegister;
+
+        if($resultGymRegister){
+            $helper->SendSuccessToast("Registered for $rowGym[name] Gym!!");
+            $helper->Redirect(BASE_URL . "gyms.php");
+        } else {
+            $helper->SendErrorToast("Cannot Registered for $rowGym[name] Gym!!");
+            $helper->Redirect(BASE_URL . "gyms.php");
+        }
+    } else if(isset($_POST['register'])) {
+        $helper->Redirect(BASE_URL . "login.php");
+    }
 ?>
 <style>
     .card-body .detail .title {
