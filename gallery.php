@@ -16,7 +16,7 @@ $currentPage = "gallery";
             <div class="row py-lg-5">
                 <div class="col-lg-6 col-md-8 mx-auto">
                     <h1 class="fw-light">Gallery</h1>
-                    <p class="lead text-muted">Some Images of Event works.</p>
+                    <p class="lead text-muted">Some Images of Fitness works.</p>
                 </div>
             </div>
         </section>

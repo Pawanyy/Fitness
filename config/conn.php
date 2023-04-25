@@ -12,21 +12,35 @@ $sqlSettings = "SELECT * FROM tbl_settings";
 $resultSettings = $conn -> query($sqlSettings);
 $settings = $resultSettings -> fetch_assoc();
 
-$gallery = [
-    "assets/img/gallery/0.jpg",
-    "assets/img/gallery/00.jpg",
-    // "assets/img/gallery/000.jpg",
-    "assets/img/gallery/1.jpg",
-    "assets/img/gallery/2.jpg",
-    "assets/img/gallery/3.jpg",
-    "assets/img/gallery/4.jpg",
-    "assets/img/gallery/5.jpg",
-    "assets/img/gallery/6.jpg",
-    "assets/img/gallery/7.jpg",
-    "assets/img/gallery/8.jpg",
-    "assets/img/gallery/9.jpg",
-    "assets/img/gallery/10.jpg",
-    "assets/img/gallery/11.jpg",
-    "assets/img/gallery/12.jpg",
-    "assets/img/gallery/13.jpg",
-];
+$gallery = [];
+$special_gallery = [];
+
+$all_files = glob("assets/img/gallery/special/*.*");
+for ($i=0; $i<count($all_files); $i++)
+{
+    $image_name = $all_files[$i];
+    $supported_format = array('gif','jpg','jpeg','png');
+    $ext = strtolower(pathinfo($image_name, PATHINFO_EXTENSION));
+    if (in_array($ext, $supported_format))
+        {
+            $special_gallery[] = $image_name;
+            $gallery[] = $image_name;
+        } else {
+            continue;
+        }
+}
+
+$all_files = glob("assets/img/gallery/*.*");
+for ($i=0; $i<count($all_files); $i++)
+{
+    $image_name = $all_files[$i];
+    $supported_format = array('gif','jpg','jpeg','png');
+    $ext = strtolower(pathinfo($image_name, PATHINFO_EXTENSION));
+    if (in_array($ext, $supported_format))
+        {
+            $gallery[] = $image_name;
+            //echo $image_name . "<br /><br />";
+        } else {
+            continue;
+        }
+}

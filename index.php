@@ -3,8 +3,6 @@ $currentPage = "home";
 ?>
 <?php require_once __DIR__ . "/include/layout-start.php"; ?>
 <?php
-    $gallery = array_splice($gallery, 0, 3);
-
     $sqlEvents = "SELECT a.* FROM tbl_gyms a ORDER BY a.id DESC LIMIT 3";
     $resultEvents = $conn -> query($sqlEvents);
     $rowEvents = $resultEvents -> fetch_all(MYSQLI_ASSOC);
@@ -109,7 +107,7 @@ $currentPage = "home";
     <div class="row pt-3">
         <?php 
         $sl = 0;
-        foreach($gallery as $key => $value) { 
+        foreach($special_gallery as $key => $value) { 
             $sl++;
             ?>
         <div class="col-4 mb-3">
