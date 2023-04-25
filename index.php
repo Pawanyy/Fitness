@@ -136,7 +136,7 @@ $currentPage = "home";
                     <div class="card-body">
                         <p class="card-text">
                             <?=substr($value['description'], 0, 255)."..."?>
-                            <a href="<?=BASE_URL?>eventDetails.php?event_id=<?=$value['id']?>"
+                            <a href="<?=BASE_URL?>gymDetails.php?event_id=<?=$value['id']?>"
                             class="btn btn-link text-decoration-none p-0">Read more</a>
                         </p>
                         <!-- <?php if(empty($value['reg_date'])){ ?>
