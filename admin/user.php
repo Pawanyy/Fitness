@@ -39,6 +39,10 @@ if(isset($_POST['update'])){
     }
 }
 
+$sqlUserGyms = "SELECT a.id, b.name, c.name AS plan_name, c.price AS plan_price, a.date AS reg_date FROM tbl_gym_register a JOIN tbl_gyms b ON a.gym_id = b.id JOIN tbl_gym_plans c ON a.plan_id=c.id WHERE a.user_id = $user_id";
+$resultUserGyms = $conn -> query($sqlUserGyms);
+$rowUserGyms = $resultUserGyms -> fetch_all(MYSQLI_ASSOC);
+
 ?>
 <?php 
 $title = "User Details";
@@ -103,4 +107,48 @@ require_once __DIR__ . "/include/layout-start.php";
         </div>
     </div>
 </section>
+<div class="table-responsive">
+    <h1 class="py-2 px-3 border border-1">User Gyms</h1>
+    <table class="table table-bordered  table-striped">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Gym Name</th>
+                <th scope="col">Plan Name</th>
+                <th scope="col">Plan Price</th>
+                <th scope="col">Registerd Date</th>
+                <th scope="col">Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php 
+            $sl = 0;
+            foreach ($rowUserGyms as $key => $value) { 
+                $sl++;
+            ?>
+                <tr>
+                    <th scope="row"><?=$sl?></th>
+                    <td><?=$value['name']?></td>
+                    <td><?=$value['plan_name']?></td>
+                    <td><?=$value['plan_price']?></td>
+                    <td><?=$value['reg_date']?></td>
+                    <td>
+                        <a href="<?=ADMIN_URL?>gymDetails.php?gym_id=<?=$value['id']?>">
+                            View
+                        </a>
+                    </td>    
+                </tr>
+            <?php } ?>
+            <?php if($sl == 0) { ?>
+                <tr>
+                    <td colspan="9">
+                        <div class="text-center py-2">
+                            No Registered Users
+                        </div>
+                    </td>
+                </tr>
+            <?php } ?> 
+        </tbody>
+    </table>
+</div>
 <?php require_once __DIR__ . "/include/layout-end.php"; ?>
