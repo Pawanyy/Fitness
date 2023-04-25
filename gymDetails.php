@@ -29,6 +29,13 @@ $sql = "SELECT a.*, null as r_date FROM tbl_gyms a WHERE a.id = $event_id";
 
 $result = $conn -> query($sql);
 $row = $result -> fetch_assoc();
+
+$sqlPlans = "SELECT a.* FROM tbl_gym_plans a WHERE a.gym_id = $event_id";
+$resultPlans = $conn -> query($sqlPlans);
+$gymPlans = $resultPlans -> fetch_all(MYSQLI_ASSOC);
+
+$activities = [];
+$activities = explode(",", $row['activities']);
 ?>
 <main role="main">
     <section class="jumbotron text-center">
@@ -42,28 +49,78 @@ $row = $result -> fetch_assoc();
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h5 class="card-title mb-0">
+                            <h5 class="card-title h2 mb-4">
                                 <?=$row['name']?>
                             </h5>
+                            <div class="d-flex justify-content-between">
+                                <span>
+                                    <i class="bi bi-person-fill-x"></i>
+                                    <strong>for Phy Disabled: </strong>
+                                    <?= $row['phy_disabled'] ? 'Yes' : 'No' ?>
+                                </span>
+                                <span>
+                                    <i class="bi bi-geo-alt-fill"></i>
+                                    <strong>Location: </strong>
+                                    <?= $row['location'] ?>
+                                </span>
+                            </div>
                         </div>
                         <div class="card-body">
                             <p class="card-text">
                                 <?=$row['description']?>
                             </p>
-                            <?php if(empty($row['reg_date'])){ ?>
+                            <hr>
+                            <div class="list-group">
+                                <h2></h2>
+                                <div class="list-group-item list-group-item-action active rounded h3">Activities</div>
+                                <?php foreach($activities as $key => $value) { ?>
+                                <div class="list-group-item"><?=$value?></div>
+                                <?php } ?>
+                            </div>
+                            <!-- <?php if(empty($row['reg_date'])){ ?>
                             <a href="<?=BASE_URL?>gyms.php?event_id=<?=$row['id']?>"
                                 onclick="return confirm('Are you Sure to book for <?=$row['name']?> event!')"
                                 class="btn btn-warning">Book</a>
-                                <?php } else { ?>
-                                    <button class="btn btn-secondary">Already Booked</button>
-                                    <span class="d-block font-sm mt-2"> Registered on: <?= $row['reg_date'] ?></span>
-                                <?php } ?>
+                            <?php } else { ?>
+                                <button class="btn btn-secondary">Already Booked</button>
+                                <span class="d-block font-sm mt-2"> Registered on: <?= $row['reg_date'] ?></span>
+                            <?php } ?> -->
                         </div>
-                        <div class="card-footer">
+                        <!-- <div class="card-footer">
                             <span><?= $row['date'] ?></span>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-12">
+                    <h1 class="text-center">Plans</h1>
+                </div>
+                <?php 
+                foreach($gymPlans as $key => $value) {
+                    $facilities = [];
+                    $facilities = explode(",", $value['facilities']);
+                    ?>
+                <div class="col-4">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                        <div class="card-header py-3">
+                            <h4 class="my-0 fw-normal"><?=$value['name']?></h4>
+                        </div>
+                        <div class="card-body">
+                            <h1 class="card-title pricing-card-title">
+                                ₹<?=$value['price']?>
+                                <small class="text-muted fw-light">/ <?=$value['duration']?> months</small>
+                            </h1>
+                            <ul class="list-unstyled mt-3 mb-4">
+                                <?php foreach($facilities as $key => $value) { ?>
+                                <li><?=$value?></li>
+                                <?php } ?>
+                            </ul>
+                            <!-- <button type="button" class="w-100 btn btn-lg btn-outline-primary">Sign up for free</button> -->
                         </div>
                     </div>
                 </div>
+                <?php } ?>
             </div>
         </div>
     </div>

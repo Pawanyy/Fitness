@@ -105,18 +105,18 @@ $currentPage = "events";
                                     <a href="<?=BASE_URL?>gymDetails.php?event_id=<?=$value['id']?>"
                                     class="btn btn-link text-decoration-none p-0">Read more</a>
                                 </p>
-                                <!-- <?php if(empty($value['reg_date'])){ ?>
-                                <a href="<?=BASE_URL?>gyms.php?event_id=<?=$value['id']?>"
-                                    onclick="return confirm('Are you Sure to book for <?=$value['name']?> event!')"
-                                    class="btn btn-warning">Book</a>
-                                <?php } else { ?>
-                                    <button class="btn btn-secondary">Already Booked</button>
-                                    <span class="d-block font-sm mt-2"> Registered on: <?= $value['reg_date'] ?></span>
-                                <?php } ?> -->
                             </div>
-                            <div class="card-footer">
-                                <i class="bi bi-geo-alt-fill"></i>
-                                <span><?= $value['location'] ?></span>
+                            <div class="card-footer d-flex justify-content-between">
+                                <span>
+                                    <i class="bi bi-person-fill-x"></i>
+                                    <strong>for Phy Disabled: </strong>
+                                    <?= $value['phy_disabled'] ? 'Yes' : 'No' ?>
+                                </span>
+                                <span>
+                                    <i class="bi bi-geo-alt-fill"></i> 
+                                    <strong>Location: </strong>
+                                    <?= $value['location'] ?>
+                                </span>
                             </div>
                         </div>
                     </div>
