@@ -140,7 +140,7 @@ $currentPage = "home";
                             class="btn btn-link text-decoration-none p-0">Read more</a>
                         </p>
                         <!-- <?php if(empty($value['reg_date'])){ ?>
-                        <a href="<?=BASE_URL?>events.php?event_id=<?=$value['id']?>"
+                        <a href="<?=BASE_URL?>gyms.php?event_id=<?=$value['id']?>"
                             onclick="return confirm('Are you Sure to book for <?=$value['name']?> event!')"
                             class="btn btn-warning">Book</a>
                             <?php } else { ?>

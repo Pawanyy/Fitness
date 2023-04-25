@@ -14,11 +14,11 @@ if(isset($_GET['event_id']) && !empty($_GET['event_id'])){
     
     if($rowEvent === false || empty($rowEvent)){
         $helper->SendErrorToast("Event Doesn't Exist!!");
-        $helper->Redirect(BASE_URL . "events.php");
+        $helper->Redirect(BASE_URL . "gyms.php");
     }
     
 } else {
-    $helper->Redirect(BASE_URL . "events.php");
+    $helper->Redirect(BASE_URL . "gyms.php");
 }
 
 $sql = "SELECT a.*, null as r_date FROM tbl_gyms a WHERE a.id = $event_id";
@@ -51,7 +51,7 @@ $row = $result -> fetch_assoc();
                                 <?=$row['description']?>
                             </p>
                             <?php if(empty($row['reg_date'])){ ?>
-                            <a href="<?=BASE_URL?>events.php?event_id=<?=$row['id']?>"
+                            <a href="<?=BASE_URL?>gyms.php?event_id=<?=$row['id']?>"
                                 onclick="return confirm('Are you Sure to book for <?=$row['name']?> event!')"
                                 class="btn btn-warning">Book</a>
                                 <?php } else { ?>
