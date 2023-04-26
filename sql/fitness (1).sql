@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Apr 26, 2023 at 04:42 PM
+-- Generation Time: Apr 26, 2023 at 04:55 PM
 -- Server version: 10.3.10-MariaDB-log
 -- PHP Version: 8.0.15
 
@@ -56,6 +56,18 @@ CREATE TABLE `tbl_faq` (
   `question` text NOT NULL,
   `answer` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_faq`
+--
+
+INSERT INTO `tbl_faq` (`id`, `question`, `answer`) VALUES
+(1, 'What are your gym hours?', 'Our gym is open 24/7.'),
+(2, 'Do you offer personal training?', 'Yes, we offer personal training sessions with certified trainers.'),
+(3, 'What is your cancellation policy?', 'We require a 24-hour notice for cancellations.'),
+(4, 'Do you have group fitness classes?', 'Yes, we offer a variety of group fitness classes including yoga, Pilates, and spinning.'),
+(5, 'What is your membership fee?', 'Our membership fee is $50 per month.'),
+(6, 'Do you offer a free trial?', 'Yes, we offer a 3-day free trial for new members.');
 
 -- --------------------------------------------------------
 
@@ -190,7 +202,7 @@ CREATE TABLE `tbl_settings` (
 --
 
 INSERT INTO `tbl_settings` (`id`, `name`, `address`, `phone`, `email`, `website`, `about_desc`, `main_desc`) VALUES
-(6, 'FitNess', 'Thane, Maharashtra, India', '+911234567890', 'fit@gmail.com', 'www.fit.com', 'Mollis pretium lorem primis senectus habitasse lectus scelerisque donec, ultricies tortor suspendisse adipiscing fusce morbi volutpat pellentesque, consectetur mi risus molestie curae malesuada cum. Dignissim lacus convallis massa mauris enim ad mattis magnis senectus montes, mollis taciti phasellus accumsan bibendum semper blandit suspendisse faucibus nibh est, metus lobortis morbi cras magna vivamus per risus fermentum.', 'Mollis pretium lorem primis senectus habitasse lectus scelerisque donec, ultricies tortor suspendisse adipiscing fusce morbi volutpat pellentesque, consectetur mi risus molestie curae malesuada cum. Dignissim lacus convallis massa mauris enim ad mattis magnis senectus montes, mollis taciti phasellus accumsan bibendum semper blandit suspendisse faucibus nibh est, metus lobortis morbi cras magna vivamus per risus fermentum.');
+(14, 'FitNess', 'Thane, Maharashtra, India', '+911234567890', 'fit@gmail.com', 'www.fit.com', 'Welcome to our fitness website! We are passionate about helping people live healthier lives through physical fitness and overall wellness. Our team is comprised of experienced fitness professionals who are dedicated to helping our members achieve their fitness goals.\r\n\r\n<br><br>Our fitness center is equipped with state-of-the-art facilities and top-of-the-line equipment to ensure that our members have everything they need to achieve their desired results. We offer a variety of fitness programs to cater to our members\' individual needs and preferences. From group fitness classes, personal training sessions, to nutrition coaching, we have everything our members need to get fit and stay healthy.', 'Welcome to our fitness website! We are passionate about helping people live healthier lives through physical fitness and overall wellness. <br>Our team is comprised of experienced fitness professionals who are dedicated to helping our members achieve their fitness goals.\r\n\r\nOur fitness center is equipped with state-of-the-art facilities and top-of-the-line equipment to ensure that our members have everything they need to achieve their desired results. We offer a variety of fitness programs to cater to our members\' individual needs and preferences. From group fitness classes, personal training sessions, to nutrition coaching, we have everything our members need to get fit and stay healthy.');
 
 -- --------------------------------------------------------
 
@@ -283,7 +295,7 @@ ALTER TABLE `tbl_contact`
 -- AUTO_INCREMENT for table `tbl_faq`
 --
 ALTER TABLE `tbl_faq`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `tbl_feedback`
@@ -313,7 +325,7 @@ ALTER TABLE `tbl_gym_register`
 -- AUTO_INCREMENT for table `tbl_settings`
 --
 ALTER TABLE `tbl_settings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `tbl_users`
