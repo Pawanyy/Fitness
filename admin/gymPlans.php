@@ -67,9 +67,9 @@ $rows = $result -> fetch_all(MYSQLI_ASSOC);
                     <td><?=$value['duration']?></td>
                     <td><?=$value['facilities']?></td>
                     <td>
-                        <!-- <a href="<?=ADMIN_URL?>user.php?user_id=<?=$value['id']?>">
+                        <a href="<?=ADMIN_URL?>gymPlanDetails.php?plan_id=<?=$value['id']?>">
                             View
-                        </a> -->
+                        </a>
                         <a class="ms-1"
                             href="<?=ADMIN_URL?>gymPlans.php?did=<?=$value['id']?>"
                             onclick="return confirm('Are you sure?')">
