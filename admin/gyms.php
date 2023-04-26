@@ -87,7 +87,7 @@ $rows = $result -> fetch_all(MYSQLI_ASSOC);
             <?php } ?>
             <?php if($sl == 0) { ?>
                 <tr>
-                    <td colspan="5">
+                    <td colspan="9">
                         <div class="text-center py-2">
                             No Gyms
                         </div>

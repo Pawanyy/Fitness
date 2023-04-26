@@ -12,6 +12,21 @@ $currentPage = "events";
         // $sql = "SELECT a.*, (SELECT b.date FROM tbl_event_register b WHERE a.id=b.gym_id AND b.user_id = $user_id) AS reg_date FROM tbl_gyms a;";
     }
 
+    if(isset($_GET['searchGym'])){
+        $searchText = $_GET['searchText'];
+        $phy_disabled = $_GET['phy_disabled'];
+
+        $sql = "SELECT a.*, null as r_date FROM tbl_gyms a WHERE 1";
+
+        if(!empty(trim($searchText))){
+            $sql .= " AND (name LIKE '%$searchText%' OR location LIKE '%$searchText%' OR activities LIKE '%$searchText%')";
+        }
+
+        if($phy_disabled == 1){
+            $sql .= " AND a.phy_disabled = 1";
+        }
+    }
+
     $result = $conn -> query($sql);
     $rows = $result -> fetch_all(MYSQLI_ASSOC);
 
@@ -90,6 +105,20 @@ $currentPage = "events";
                 <a href="/" class="btn btn-primary my-2">Home</a>
                 <a href="<?=BASE_URL?>contact.php" class="btn btn-secondary my-2">Contact Us</a>
             </p>
+            <form class="row mx-5 text-start" method='get'>
+                <div class="col-8">
+                    <input type="search" class="form-control" name="searchText" placeholder="Search" value="<?=isset($_GET['searchText']) ? $_GET['searchText'] : ''?>">
+                </div>
+                <div class="col-2">
+                    <select name="phy_disabled" class="form-control" required>
+                        <option value="0">All</option>
+                        <option value="1" <?=isset($_GET['phy_disabled']) && $_GET['phy_disabled'] == 1 ? 'Selected' : ''?>>Phy Disabled</option>
+                    </select>
+                </div>
+                <div class="col-2">
+                    <button type="submit" name="searchGym" class="btn btn-primary w-100">Search</button>
+                </div>
+            </form>
         </div>
     </section>
 

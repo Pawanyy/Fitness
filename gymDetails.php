@@ -120,11 +120,32 @@ $activities = explode(",", $row['activities']);
                             <?php } else { ?>
                             <a href="login.php" class="w-100 btn btn-lg btn-outline-primary">Sign up for free</a>
                             <?php } ?>
+                            <?php if($helper->isUserLogin()){ ?>
+
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
                 <?php } ?>
             </div>
+            <!-- <?php if($helper->isUserLogin()){ ?>
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card mb-4 rounded-3 shadow-sm">
+                        <div class="card-header py-3">
+                            <h4 class="my-0 fw-normal">Feedback</h4>
+                        </div>
+                        <div class="card-body">
+                            <form action="gyms.php" method="post">
+                                <label for="" class="form-label">Feedback Message</label>
+                                <textarea class="form-control mb-3" name="feedback" rows="3"></textarea>
+                                <button type="submit" name="register" class="btn btn-lg btn-outline-primary">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php } ?> -->
         </div>
     </div>
 </main>
