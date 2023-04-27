@@ -16,6 +16,32 @@ if(isset($_POST['create'])){
     $result = $conn -> query($sql);
 
     if($result){
+
+        $mailer = new Mailer();
+
+        $subject = "User Registered!";
+        $message = "<div>
+                    <h3>Your Account has been created!<br> Pls Enjoy.</h3>
+                    <table cellpadding='5' align='left' border='1'>
+                    <tbody>
+                        <tr>
+                        <th>User Name: </th>
+                        <td>$name</td>
+                        </tr>
+                        <tr>
+                        <th>User Email: </th>
+                        <td>$email</td>
+                        </tr>
+                        <tr>
+                        <th>Registered At: </th>
+                        <td>$created_at</td>
+                        </tr>
+                    </tbody>
+                    </table>
+                </div>";
+
+        $mailer->SendMail($email, $subject, $message);
+
         $helper->SendSuccessToast("User Created Sucessfully");
         $helper->Redirect(ADMIN_URL . 'users.php');
     } else {
