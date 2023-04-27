@@ -24,9 +24,51 @@ if(isset($_POST['update'])){
     $activities   = $conn->real_escape_string( $_POST['activities']);
     $description  = $conn->real_escape_string( $_POST['description']);
     $phy_disabled = isset($_POST['phy_disabled']) ? 1 : 0;
+    $newimage     = "";
+    $old_image    = $_POST['old_image'];
     // $date = $_POST['date'];
+
+    //File Upload
+    if( ! empty($_FILES["image"]["name"])){
+
+        $filepath = $_FILES["image"]["tmp_name"];  
+        
+        $iUpload = new ImageUpload();
+        
+        $iUpload->setName('profile_' . time());
+        $iUpload->setMime(['png', 'jpg', 'jpeg']);
+        $iUpload->setPath( $iUpload->merge_paths(dirname( __DIR__) , "/assets/img/gym/"));
+        $iUpload->Upload($filepath);
+
+        if ( $iUpload->isUploaded()) {
+
+            $image = $iUpload->getFullName();
+        
+            //remove old file
+            $old_image_path = (dirname( __DIR__)) . (empty($old_image) ? "o.txt" : $old_image);
+            if(file_exists($old_image_path)) {
+                unlink($old_image_path);
+            }
+        
+            //update new file
+            $newimage = "/assets/img/gym/" . $image;
+            $message = $iUpload->getMessage();
+            $helper->SendSuccessToast($message);
+
+        } else {
+
+            $valid = false;
+            $message = $iUpload->getMessage();
+            $helper->SendErrorToast($message);
+
+        }
+    }
+
+    if(empty($newimage)){
+        $newimage = $old_image;
+    }
     
-    $sql = "UPDATE tbl_gyms SET name='$name', location='$location', activities='$activities', phy_disabled='$phy_disabled', description='$description' WHERE id = $gym_id";
+    $sql = "UPDATE tbl_gyms SET name='$name', image='$newimage', location='$location', activities='$activities', phy_disabled='$phy_disabled', description='$description' WHERE id = $gym_id";
     $result = $conn -> query($sql);
 
     if($result){
@@ -52,11 +94,19 @@ require_once __DIR__ . "/include/layout-start.php";
         <div class="card-body">
             <h5 class="card-title">Gym Details</h5>
             <!-- General Form Elements -->
-            <form method="post">
+            <form method="post" enctype="multipart/form-data">
                 <div class="row mb-3">
                     <label for="inputText" class="col-sm-2 col-form-label">Gym Name</label>
                     <div class="col-sm-10">
                     <input type="text" name="name" required class="form-control" value="<?=$rowGym["name"]?>">
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="formFile" class="col-sm-2 col-form-label">Image Upload</label>
+                    <div class="col-sm-10">
+                        <img src="<?=$rowGym['image']?>" height="100" class="mb-2 rounded"/>
+                        <input class="form-control" type="hidden" name="old_image" value="<?=$rowGym['image']?>" id="formFile">
+                        <input class="form-control" type="file" name="image" id="formFile">
                     </div>
                 </div>
                 <!-- <div class="row mb-3">

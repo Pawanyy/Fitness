@@ -49,6 +49,7 @@ $rows = $result -> fetch_all(MYSQLI_ASSOC);
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Gym Name</th>
+                <th scope="col">Gym Image</th>
                 <th scope="col">Gym Location</th>
                 <th scope="col">Gym Activities</th>
                 <th scope="col">Gym Description</th>
@@ -67,6 +68,9 @@ $rows = $result -> fetch_all(MYSQLI_ASSOC);
                 <tr>
                     <th scope="row"><?=$sl?></th>
                     <td><?=$value['name']?></td>
+                    <td>
+                        <img src="<?=$value['image']?>" height="50"/>
+                    </td>
                     <td><?=$value['location']?></td>
                     <td><?=$value['activities']?></td>
                     <td><?=$value['description']?></td>

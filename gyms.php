@@ -128,8 +128,9 @@ $currentPage = "events";
                 <?php foreach ($rows as $key => $value) { ?>
                     <div class="col-4 mb-4">
                         <div class="card">
-                            <div class="card-header">
-                                <h5 class="card-title mb-0">
+                            <div class="card-header p-0">
+                                <img src="<?=$value['image']?>" class="w-100 mb-0 rounded"/>
+                                <h5 class="card-title px-2 py-1 mb-0">
                                     <?=$value['name']?>
                                 </h5>
                             </div>
